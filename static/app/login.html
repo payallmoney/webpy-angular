@@ -1,0 +1,18 @@
+<div style='height:100%;width:100%;padding-top:100px;background:url(img/bg.jpg)'>
+	<div style='width:800px;height:80px;margin:0px auto 0 auto;background:url(img/title.png) no-repeat' >
+		<img src='img/title.png' style='with:800px;height:80px'/>
+	</div>
+	<div close="close()" class='login' style='width:300px;margin:20px auto 0px auto;'>
+		<div class='title'>系统登录</div>
+		<div class='content'>
+			<form style="padding:10px 20px 10px 40px;" >
+				<p>用户名: <input ng-model="data.username" type="text"></p>
+				<p>密&nbsp;&nbsp;码: <font color="red" ng-bind-html-unsafe='data.msg'></font><input ng-model="data.password" type="password" ></p>
+				<div style="text-align:center;">
+					<button class='btn' style='margin:0 10px' ng-click='login()'>登录</button>
+					<button class='btn' style='margin:0 10px' ng-click='reset()'>取消</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

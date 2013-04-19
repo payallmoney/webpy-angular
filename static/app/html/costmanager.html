@@ -1,0 +1,32 @@
+<body class="easyui-layout">
+	<table id="cost-grid" class="easyui-datagrid" style="margin-bottom:50px"  
+			data-options="fitColumns:false,singleSelect:true,pagination:true,autoRowHeight:false,fit:true,toolbar:'#cost-tools',pagination:true,pageNumber:1,pageSize:20,pageList:[10,20,30,50]" >  
+		<thead>  
+			<tr>  
+				<th data-options="field:'code',width:100">代码</th>  
+				<th data-options="field:'name',width:100">名称</th>  
+				<th data-options="field:'price',width:100,align:'right'">价格</th>  
+			</tr>  
+		</thead>  
+	</table>  
+	<div id="cost-tools" >
+		<a id="btn_add" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">增加</a> 
+		<a id="btn_edit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a> 
+		<a id="btn_remove" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+	</div>
+	
+<script>
+	$.parser.onComplete = function(){
+	/*
+		var pager = $('#cost-grid').datagrid('getPager');
+		pager.pagination({ 
+			showPageList:false,  		
+			total:1,
+			pageSize :20,
+			beforePageText : "第",
+			afterPageText : "页",
+			displayMsg :"共{total}页"
+		});
+		*/
+	};
+</script>

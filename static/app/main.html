@@ -1,0 +1,37 @@
+<div class='mainbody'>
+	<div style="height: 40px; " >
+		<img src="img/icons/201101251540294293.png" style="margin:0px" align="absmiddle">
+		<font style="margin-top: 10px ; font-weight: bold; font-size: 16px; color: #44454a;">众烁石材进销存管理系统</font>
+		<p style="margin-left:10px;margin-right:10px;float: right; color: gray;">
+			<a href="/">退出系统</a>
+		</p>
+		<p style="margin-left:10px;float: right; color: gray; ">用户：{{username}}</p>
+	</div>
+	<div class='leftmenu'>
+ 	  <div class="accordion-group ng-scope" ng-repeat="menu in menus" ng-style="menu.style">  
+	  	<div class="accordion-heading">
+			<a class="accordion-toggle ng-binding" ng-click="isOpen = !isOpen" ><img ng-src='{{menu.icon}}'style='margin:0 5px 4px 0'>{{menu.text}}</a>
+		</div>  
+		<div class="accordion-body collapse" collapse="!isOpen" style="height: auto;">    
+			<div class="accordion-inner" >
+				<div ng-repeat="child in menu.child" class="menuitem ng-scope">
+					<div  style='cursor: pointer;'>
+						<a href='' ng-click="clickmenu(child.text,child.url)"> 
+							<img  ng-src="{{child.img}}">
+							<div  ng-bind-html-unsafe="child.text" ></div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>  
+	   </div>
+	</div>
+	<div class='tabcontent'>
+		<tabs>
+			<pane heading="简介">众烁石材进销存管理系统是一套基于网页的石材管理系统，使用了最新的js框架，最流行的数据库，最简洁好用的语言及最简单的web框架开发而成!</pane>
+			<pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">
+				<div ng-include='pane.url'></div>
+			</pane>
+		</tabs>
+	</div>
+</div>
