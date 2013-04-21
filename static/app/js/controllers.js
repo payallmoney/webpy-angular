@@ -3,14 +3,6 @@
 /* Controllers */
 
 
-function MyCtrl1() {}
-MyCtrl1.$inject = [];
-
-
-function MyCtrl2() {
-}
-MyCtrl2.$inject = [];
-
 
 var LoginCtrl = function ($scope,$http,$location,loginService) {
 	$scope.data = {};
@@ -37,12 +29,11 @@ var LoginCtrl = function ($scope,$http,$location,loginService) {
 };
 
 
-var MainCtrl = function ($scope,$http,$location,loginService) {
-	console.log(loginService);
-	if(!loginService.user){
+var MainCtrl = function ($scope,$http,$location,loginService,paginationService) {
+	/* if(!loginService.user){
 		$location.path('/login');
 		$location.replace();
-	}
+	} */
 	$scope.menus=[
 		{text:'系统管理',icon:'img/icons/setting.png',test:{background:"url(img/setting.png) norepeat"},child:[
 			{text:'系统管理',img:'img/menu/9.gif',url:'html/systemmanager.html'}
@@ -57,18 +48,52 @@ var MainCtrl = function ($scope,$http,$location,loginService) {
 	];
 	$scope.panes =[];
 	$scope.clickmenu = function(name,url){
-		console.log(name)
-		console.log(url)
+		console.log($scope.panes);
+		console.log($scope.panes.length);
 		for(var i = 0 ;i < $scope.panes.length ; i++){
 			var pane = $scope.panes[i];
 			console.log($scope.panes[i]);
 			if(name == $scope.panes[i].title){
 				$scope.panes[i].active = true;
-				console.log('1111111111111')
 				return;
 			}
 		}
-		console.log('222222222')
 		$scope.panes[$scope.panes.length]={title:name,active:true,url:url};
 	}
+	//增加tab双击事件
+	$(document).on("dblclick", ".nav-tabs a",function (e) {
+			for(var i = 0 ;i < $scope.panes.length ; i++){		
+				if(e.currentTarget.innerText == $scope.panes[i].title){
+					$scope.panes.splice(i,1);
+					$scope.$digest();
+					return;
+				}
+			} 
+		});
+	
+};
+
+var SettleManagerCtrl = function($scope,$http,$location,paginationService) {
+	/* if(!loginService.user){
+		$location.path('/login');
+		$location.replace();
+	} */
+	//显示列表
+
+    $scope.gridData =  [];
+    $scope.gridOptions = {
+        data: 'gridData',
+		columnDefs: [{field:'name', displayName:'姓名'}, {field:'age', displayName:'年龄'}]
+    };
+}
+
+var PaginationDemoCtrl = function ($scope,paginationService) {
+  $scope.noOfPages = 111;
+  $scope.currentPage = 4;
+  $scope.maxSize = 10;
+  $scope.maxNum = 1105;
+  
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
 };

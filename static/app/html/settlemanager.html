@@ -1,42 +1,10 @@
-<body class="easyui-layout">
-	<table id="settle-grid" class="easyui-datagrid" style="margin-bottom:50px"  
-			data-options="fitColumns:false,singleSelect:true,pagination:true,autoRowHeight:false,fit:true,toolbar:'#settle-tools',pagination:true,pageNumber:1,pageSize:20,pageList:[10,20,30,50]" >  
-		<thead>  
-			<tr>  
-				<th data-options="field:'code',width:100">代码</th>  
-				<th data-options="field:'name',width:100">名称</th>  
-				<th data-options="field:'price',width:100,align:'right'">价格</th>  
-			</tr>  
-		</thead>  
-	</table>  
-	<div id="settle-tools" >
-		<a id="btn_add" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"  onclick="javascript:settle_add()">增加</a> 
-		<a id="btn_edit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a> 
-		<a id="btn_remove" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a> 
-		<input id="settle_searcher" class="easyui-searchbox" style="width:300px"  
-			data-options="searcher:settle_query(),prompt:'请输入查询条件',menu:'#settle_drop'"></input>  
-		<div id="settle_drop" style="width:120px,display:none">  
-			<div data-options="name:'all'">按日期</div>  
-			<div data-options="name:'sports'">按公司</div>  
-		</div>  		
-	</div>
-	<div id="settle_addpanel" class="easyui-dialog" title="【结算表】新增" style="width:400px;height:400px;"  
-        data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true,inline:true,onStopDrag:function(e){console.log(e)}">  
-		<div id="settle_addpanel_tools" data-options="region:'north'" style='margin:5px 0px 5px 10px' >
-			<a id="btn_addpanel_add" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"  onclick="javascript:settle_add()">保存</a> 
-		</div>
-		<table class="easyui-propertygrid"	data-options="region:'center',url:'/settlemanager/add.json',showGroup:true,scrollbarSize:0,height:236" ></table>
-		<table class="easyui-grid"	data-options="region:'south',url:'/settlemanager/add.json',showGroup:true,scrollbarSize:0,height:330" ></table>
-	</div>  
-<script>
-	$.parser.onComplete = function(){
-	}
-	function settle_add(){
-		
-		$("#settle_addpanel").dialog("open");
-	}
-	function settle_query(){
-	
-	}
 
-</script>
+<div class='gridbuttonDiv'>
+	<button ng-click='' class='btn'>新增</button>
+</div>
+<div ng-controller="SettleManagerCtrl" class="gridStyle" ng-grid="gridOptions"></div>
+
+<div ng-controller="PaginationDemoCtrl">
+	<div class='totalText'>共{{maxNum}}条记录</div>
+    <pagination boundary-links="true" num-pages="noOfPages" current-page="currentPage" max-size="maxSize"></pagination>
+</div>

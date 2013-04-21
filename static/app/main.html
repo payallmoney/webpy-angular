@@ -28,9 +28,9 @@
 	</div>
 	<div class='tabcontent'>
 		<tabs>
-			<pane heading="简介">众烁石材进销存管理系统是一套基于网页的石材管理系统，使用了最新的js框架，最流行的数据库，最简洁好用的语言及最简单的web框架开发而成!</pane>
+			<pane heading="简介">众烁石材进销存管理系统</pane>
 			<pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">
-				<div ng-include='pane.url'></div>
+				<div ng-include='pane.url' style='width:100%;height:90%' ></div>
 			</pane>
 		</tabs>
 	</div>
