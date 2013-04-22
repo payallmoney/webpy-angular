@@ -226,6 +226,9 @@ border-radius: 0 !important;
 	top:5px;
 	height:35px;
 }
+.gridbuttonDiv button>img {
+	margin-right:2px;
+}
 
 .ngFooterTotalItems{
 	display:inline-block ;
@@ -276,4 +279,106 @@ border: 1px solid #ddd;
 color: #08c;
 text-align:center;
 line-height:28px;
+}
+
+
+.queryselect{
+	padding:0px !important;
+	margin:0 0 0 5px !important;
+}
+
+.queryinput{
+	padding:0px !important;
+	margin:0 5px 0 0 !important;
+	height:30px !important;
+	line-height:30px !important;
+}
+.ngHeaderCell{
+	cursor: pointer;
+	display: inline-block;
+	padding: 0px 0px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	color: #333;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+	vertical-align: middle;
+	cursor: pointer;
+	background-color: #f5f5f5 !important;
+	background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+	background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+	background-repeat: repeat-x;
+	border: 1px solid #ccc !important;
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	border-bottom-color: #b3b3b3;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+
+.ngTopPanel{
+	background-color: #fff !important;
+}
+
+.closebuttondiv{
+	position:relative;
+	top:0px;
+	right:0px;
+	width: 16px;
+	height: 16px;
+	float:right;
+	padding:3px;
+}
+
+.closebuttondiv a{
+	width: 16px;
+	height: 16px;
+	float:right;
+	display: inline-block;
+	filter: alpha(opacity=60);
+	vertical-align: top;
+}
+.panel-tool-close{
+	background: url('../img/icons/panel_tools.png') no-repeat -16px 0px;
+	border-width: 0 0 1px 0;
+}
+.modal{
+	background-color: #E0ECFF !important;
+	border-radius: 5px 5px 5px 5px !important;
+	border:1px solid #95B8E7 !important;
+	padding: 5px !important;
+	width:700px !important;
+}
+a{
+	cursor:pointer !important;
+}
+.modal-header{
+	padding:2px 5px !important;
+}
+.modal-body{
+	background-color:#fff !important;
+	margin:0 !important;
+	border-radius: 2px 2px 2px 2px !important;
+}
+.row-div:hover{
+	background-color:gray;
+}
+.modal-div{
+	font-size:12px !important;
+}
+
+.item-table select,.item-table textarea,.item-table input[type="text"],.item-table input[type="password"],.item-table input[type="datetime"],.item-table input[type="datetime-local"],.item-table input[type="date"],.item-table input[type="month"],.item-table input[type="time"],.item-table input[type="week"],.item-table input[type="number"],.item-table input[type="email"],.item-table input[type="url"],.item-table input[type="search"],.item-table input[type="tel"],.item-table input[type="color"],.item-table .uneditable{
+	height:12px !important;
+	line-height:12px !important;
+	width:100px !important;
+}
+.item-table{
+	border:1px solid gray;
 }

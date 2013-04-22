@@ -1,10 +1,88 @@
-
-<div class='gridbuttonDiv'>
-	<button ng-click='' class='btn'>新增</button>
-</div>
-<div ng-controller="SettleManagerCtrl" class="gridStyle" ng-grid="gridOptions"></div>
-
-<div ng-controller="PaginationDemoCtrl">
-	<div class='totalText'>共{{maxNum}}条记录</div>
-    <pagination boundary-links="true" num-pages="noOfPages" current-page="currentPage" max-size="maxSize"></pagination>
+<div ng-controller="SettleManagerCtrl">
+	<div class='gridbuttonDiv'>
+		<button ng-click='add()' class='btn'><img src="img/icons/edit_add.png"/>新增</button>
+		<button ng-click='' class='btn'><img src="img/icons/pencil.png"/>修改</button>
+		<button ng-click='' class='btn'><img src="img/icons/edit_remove.png"/>删除</button>
+		<select ng-model="queryType" ng-options="c.name for c in colors" class='queryselect'>
+			  <option value="">-- 选择查询项 --</option>
+		</select>
+		<input type='text' ng-model='queryItem' class='queryinput'>
+		<button ng-click='' class='btn btn_add'><img src="img/icons/query.png"/>查询</button>
+	</div>
+	<div class="gridStyle" ng-grid="gridOptions"></div>
+	<div>
+		<div class='totalText'>共{{maxNum}}行{{noOfPages}}页</div>
+		<pagination boundary-links="true" num-pages="noOfPages" current-page="currentPage" max-size="maxSize"></pagination>
+	</div>
+	<div modal="shouldBeOpen" close="close()" options="opts" class='modal-div'>
+		<div class='closebuttondiv'>
+			<a ng-click='close()' class="panel-tool-close" href="javascript:void(0)"></a>
+		</div>
+		<div class='modal-header'>
+			<img ng-src="{{ico}}"/><span style='margin-left:4px;'>{{title}}</span>
+		</div>
+		<div class="modal-body">
+			<table>
+			<tr>
+			<td>
+			供&nbsp;&nbsp;货&nbsp;&nbsp;方：<input type='text' ng-model='edit.supplier'>
+			</td>
+			<td>
+			收&nbsp;&nbsp;货&nbsp;&nbsp;方：<input type='text' ng-model='edit.consignee'>
+			</td>
+			</tr>
+			<tr>
+			<td colspan=2>
+				<button ng-click='additem()' class='btn'><img src="img/icons/edit_add.png"/>增加石材</button>
+			</td>
+			</tr>
+			<tr>
+			<td colspan=2>
+				<table class='item-table'>
+				<tr  ng-repeat="item in edit.items" class='row-div'>
+					<td>日期：</td>
+					<td>品名：</td>
+					<td>规格：</td>
+					<td>单位：</td>
+					<td>数量：</td>
+					<td>单价：</td>
+					<td>金额：</td>
+					<td>备注：</td>
+					<td>操作</td>
+				</tr>	
+				<tr  ng-repeat="item in edit.items" class='row-div'>
+					<td><input type='text' ng-model='item.supplier'></td>
+					<td><input type='text' ng-model='item.supplier'></td>
+					<td><input type='text' ng-model='edit.supplier'></td>
+					<td><input type='text' ng-model='item.supplier'></td>
+					<td><input type='text' ng-model='edit.supplier'></td>
+					<td><input type='text' ng-model='item.supplier'></td>
+					<td><input type='text' ng-model='edit.supplier'></td>
+					<td><input type='text' ng-model='item.supplier'></td>
+					<td><button ng-click="removeitem($index)" class='btn'><img src="img/icons/edit_remove.png"/></button></td>
+				</tr>	
+				</table>
+			</td>
+			</tr>
+			<tr>
+			<td>
+			供货方(签字)：<input type='text' ng-model='edit.supplier' style='width:184px;'>
+			</td>
+			<td>
+			收货方(签字)：<input type='text' ng-model='edit.consignee'style='width:184px;' >
+			</td>
+			</tr>
+			<tr>
+			<td>
+			供货日期：<input type='text' ng-model='edit.consignee'>
+			</td>
+			<td>
+			收货日期：<input type='text' ng-model='edit.consignee'>
+			</tr>
+			</table>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-warning cancel" ng-click="close()">Cancel</button>
+		</div>
+	</div>
 </div>

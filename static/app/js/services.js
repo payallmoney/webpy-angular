@@ -12,11 +12,4 @@ angular.module('myApp.services', []).factory('loginService', function() {
     };
 	
     return loginService;
-}).factory('paginationService', function() {
-    var paginationService = {};
-    paginationService.setPagination = function(pagination) {
-        paginationService.pagination=pagination;
-    };
-
-    return paginationService;
 });
