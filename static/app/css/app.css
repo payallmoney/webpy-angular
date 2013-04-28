@@ -370,15 +370,24 @@ a{
 .row-div:hover{
 	background-color:gray;
 }
+.row-div input {
+	padding:1px 2px 1px 2px !important;
+	margin:0px !important;
+	height:20px !important;
+}
 .modal-div{
 	font-size:12px !important;
 }
-
+.row-head{
+	text-align:center;
+}
+.cell-opt{
+	text-align:center;
+}
 .item-table select,.item-table textarea,.item-table input[type="text"],.item-table input[type="password"],.item-table input[type="datetime"],.item-table input[type="datetime-local"],.item-table input[type="date"],.item-table input[type="month"],.item-table input[type="time"],.item-table input[type="week"],.item-table input[type="number"],.item-table input[type="email"],.item-table input[type="url"],.item-table input[type="search"],.item-table input[type="tel"],.item-table input[type="color"],.item-table .uneditable{
-	height:12px !important;
-	line-height:12px !important;
-	width:100px !important;
+	height:20px !important;
+	line-height:18px !important;
 }
 .item-table{
-	border:1px solid gray;
+	border:0px solid gray;
 }

@@ -39,27 +39,27 @@
 			<tr>
 			<td colspan=2>
 				<table class='item-table'>
-				<tr  ng-repeat="item in edit.items" class='row-div'>
-					<td>日期：</td>
-					<td>品名：</td>
-					<td>规格：</td>
-					<td>单位：</td>
-					<td>数量：</td>
-					<td>单价：</td>
-					<td>金额：</td>
-					<td>备注：</td>
-					<td>操作</td>
+				<tr class='row-div row-head'>
+					<td style='width:50px'>日期：</td>
+					<td style='width:50px'>品名：</td>
+					<td style='width:50px'>规格：</td>
+					<td style='width:50px'>单位：</td>
+					<td style='width:50px'>数量：</td>
+					<td style='width:50px'>单价：</td>
+					<td style='width:50px'>金额：</td>
+					<td style='width:50px'>备注：</td>
+					<td style='width:50px'>操作</td>
 				</tr>	
-				<tr  ng-repeat="item in edit.items" class='row-div'>
-					<td><input type='text' ng-model='item.supplier'></td>
-					<td><input type='text' ng-model='item.supplier'></td>
-					<td><input type='text' ng-model='edit.supplier'></td>
-					<td><input type='text' ng-model='item.supplier'></td>
-					<td><input type='text' ng-model='edit.supplier'></td>
-					<td><input type='text' ng-model='item.supplier'></td>
-					<td><input type='text' ng-model='edit.supplier'></td>
-					<td><input type='text' ng-model='item.supplier'></td>
-					<td><button ng-click="removeitem($index)" class='btn'><img src="img/icons/edit_remove.png"/></button></td>
+				<tr ng-repeat="item in edit.items" class='row-div'>
+					<td><input type='text' style='width:50px' ng-model='item.inputdate'></td>
+					<td><input type='text' style='width:50px' ng-model='item.name'></td>
+					<td><input type='text' style='width:50px' ng-model='item.size'></td>
+					<td><input type='text' style='width:50px' ng-model='item.unit'></td>
+					<td><input type='text' style='width:50px' ng-model='item.num'></td>
+					<td><input type='text' style='width:50px' ng-model='item.price'></td>
+					<td><input type='text' style='width:50px' ng-model='item.sum'></td>
+					<td><input type='text' style='width:50px' ng-model='item.remark'></td>
+					<td class='cell-opt'><a ng-click="removeitem($index)" ><img src="img/icons/edit_remove.png"/></a></td>
 				</tr>	
 				</table>
 			</td>
