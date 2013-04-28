@@ -23,62 +23,63 @@
 		</div>
 		<div class="modal-body">
 			<table>
-			<tr>
-			<td>
-			供&nbsp;&nbsp;货&nbsp;&nbsp;方：<input type='text' ng-model='edit.supplier'>
-			</td>
-			<td>
-			收&nbsp;&nbsp;货&nbsp;&nbsp;方：<input type='text' ng-model='edit.consignee'>
-			</td>
-			</tr>
-			<tr>
-			<td colspan=2>
-				<button ng-click='additem()' class='btn'><img src="img/icons/edit_add.png"/>增加石材</button>
-			</td>
-			</tr>
-			<tr>
-			<td colspan=2>
-				<table class='item-table'>
-				<tr class='row-div row-head'>
-					<td style='width:50px'>日期：</td>
-					<td style='width:50px'>品名：</td>
-					<td style='width:50px'>规格：</td>
-					<td style='width:50px'>单位：</td>
-					<td style='width:50px'>数量：</td>
-					<td style='width:50px'>单价：</td>
-					<td style='width:50px'>金额：</td>
-					<td style='width:50px'>备注：</td>
-					<td style='width:50px'>操作</td>
-				</tr>	
-				<tr ng-repeat="item in edit.items" class='row-div'>
-					<td><input type='text' style='width:50px' ng-model='item.inputdate'></td>
-					<td><input type='text' style='width:50px' ng-model='item.name'></td>
-					<td><input type='text' style='width:50px' ng-model='item.size'></td>
-					<td><input type='text' style='width:50px' ng-model='item.unit'></td>
-					<td><input type='text' style='width:50px' ng-model='item.num'></td>
-					<td><input type='text' style='width:50px' ng-model='item.price'></td>
-					<td><input type='text' style='width:50px' ng-model='item.sum'></td>
-					<td><input type='text' style='width:50px' ng-model='item.remark'></td>
-					<td class='cell-opt'><a ng-click="removeitem($index)" ><img src="img/icons/edit_remove.png"/></a></td>
-				</tr>	
-				</table>
-			</td>
-			</tr>
-			<tr>
-			<td>
-			供货方(签字)：<input type='text' ng-model='edit.supplier' style='width:184px;'>
-			</td>
-			<td>
-			收货方(签字)：<input type='text' ng-model='edit.consignee'style='width:184px;' >
-			</td>
-			</tr>
-			<tr>
-			<td>
-			供货日期：<input type='text' ng-model='edit.consignee'>
-			</td>
-			<td>
-			收货日期：<input type='text' ng-model='edit.consignee'>
-			</tr>
+				<tr>
+					<td class='table-left-head'>
+					供&nbsp;&nbsp;货&nbsp;&nbsp;方：<input type='text' ng-model='edit.supplier'>
+					</td>
+					<td class='table-right-head'>
+					收&nbsp;&nbsp;货&nbsp;&nbsp;方：<input type='text' ng-model='edit.consignee'>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=2>
+						<button ng-click='additem()' class='btn'><img src="img/icons/edit_add.png"/>增加石材</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=2>
+						<table class='item-table'>
+						<tr class='row-div row-head'>
+							<td style='width:50px'>日期：</td>
+							<td style='width:50px'>品名：</td>
+							<td style='width:50px'>规格：</td>
+							<td style='width:50px'>单位：</td>
+							<td style='width:50px'>数量：</td>
+							<td style='width:50px'>单价：</td>
+							<td style='width:50px'>金额：</td>
+							<td style='width:50px'>备注：</td>
+							<td style='width:50px'>操作</td>
+						</tr>	
+						<tr ng-repeat="item in edit.items" class='row-div'>
+							<td><input style='width:50px' ng-model='item.inputdate' ui-date></td>
+							<td><input type='text' style='width:50px' ng-model='item.name'></td>
+							<td><input type='text' style='width:50px' ng-model='item.size'></td>
+							<td><input type='text' style='width:50px' ng-model='item.unit'></td>
+							<td><input type='text' style='width:50px' ng-model='item.num'></td>
+							<td><input type='text' style='width:50px' ng-model='item.price'></td>
+							<td><input type='text' style='width:50px' ng-model='item.sum'></td>
+							<td><input type='text' style='width:50px' ng-model='item.remark'></td>
+							<td class='cell-opt'><a ng-click="removeitem($index)" title='删除一行' ><img src="img/icons/edit_remove.png"/></a></td>
+						</tr>	
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class='table-left-head'>
+					供货方(签字)：<input type='text' ng-model='edit.supplier' style='width:184px;'>
+					</td>
+					<td class='table-right-head'>
+					收货方(签字)：<input type='text' ng-model='edit.consignee'style='width:184px;' >
+					</td>
+				</tr>
+				<tr>
+					<td class='table-left-head'>
+					供货日期：<input type='text' ng-model='edit.consignee' ui-date>
+					</td>
+					<td class='table-right-head'>
+					收货日期：<input type='text' ng-model='edit.consignee' ui-date>
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div class="modal-footer">
