@@ -40,18 +40,18 @@
 					<td colspan=2>
 						<table class='item-table'>
 						<tr class='row-div row-head'>
-							<td style='width:50px'>日期：</td>
-							<td style='width:50px'>品名：</td>
-							<td style='width:50px'>规格：</td>
-							<td style='width:50px'>单位：</td>
-							<td style='width:50px'>数量：</td>
-							<td style='width:50px'>单价：</td>
-							<td style='width:50px'>金额：</td>
-							<td style='width:50px'>备注：</td>
+							<td style='width:75px'>日期</td>
+							<td style='width:50px'>品名</td>
+							<td style='width:50px'>规格</td>
+							<td style='width:50px'>单位</td>
+							<td style='width:50px'>数量</td>
+							<td style='width:50px'>单价</td>
+							<td style='width:50px'>金额</td>
+							<td style='width:50px'>备注</td>
 							<td style='width:50px'>操作</td>
 						</tr>	
 						<tr ng-repeat="item in edit.items" class='row-div'>
-							<td><input style='width:50px' ng-model='item.inputdate' ui-date></td>
+							<td><input style='width:75px' ng-model='item.inputdate' ui-date></td>
 							<td><input type='text' style='width:50px' ng-model='item.name'></td>
 							<td><input type='text' style='width:50px' ng-model='item.size'></td>
 							<td><input type='text' style='width:50px' ng-model='item.unit'></td>

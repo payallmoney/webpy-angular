@@ -10,7 +10,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
     $routeProvider.otherwise({redirectTo: '/view1'});
   }]);
 */
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives','ui.bootstrap','ngGrid']).
+angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives','ui','ui.bootstrap','ngGrid']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/login', {templateUrl: 'login.html', controller: LoginCtrl});
     $routeProvider.when('/main', {templateUrl: 'main.html', controller: MainCtrl});
