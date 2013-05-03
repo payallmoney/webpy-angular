@@ -102,11 +102,15 @@ var MainCtrl = function ($scope, $http, $location, loginService) {
 
 };
 
-var SettleManagerCtrl = function ($scope, $http, $location) {
+var SettleManagerCtrl = function ($scope, $http, $location,cache) {
 	/* if(!loginService.user){
 	$location.path('/login');
 	$location.replace();
 	} */
+	cache.then(function(data) {
+		$scope.cache = data;
+		console.log($scope.cache);
+	});
 	//显示列表
 	$scope.gridData = [];
 	$scope.gridOptions = {
@@ -161,4 +165,5 @@ var SettleManagerCtrl = function ($scope, $http, $location) {
 		$scope.currentPage = pageNo;
 	};
 }
+
 

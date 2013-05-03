@@ -9,7 +9,6 @@ connection = MongoClient()
 db = connection.webpy
 mcache = memcache.Client(['127.0.0.1:11211'],debug=0)
 
-
 def initCache(refresh=False):
     cached = mcache.get("codes")
     print cached

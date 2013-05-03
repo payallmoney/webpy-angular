@@ -12,4 +12,16 @@ angular.module('myApp.services', []).factory('loginService', function() {
     };
 	
     return loginService;
+}).factory('cache', function($http) {	
+	 // var mcache = {
+		// async: function() {
+			// var promise = $http.post('/cache.json').then(function (response) {
+				// console.log("这里执行了几次?用来确认singleton");
+				// return response.data;
+			// });
+			// return promise;
+		// }
+	// };
+    // return mcache;
+	return $http.post('/cache.json');
 });
