@@ -102,7 +102,7 @@ var MainCtrl = function ($scope, $http, $location, loginService) {
 
 };
 
-var SettleManagerCtrl = function ($scope, $http, $location,cache) {
+var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 	/* if(!loginService.user){
 	$location.path('/login');
 	$location.replace();
@@ -125,7 +125,10 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache) {
 		]
 	};
 	//编辑数据
-	$scope.edit = {};
+	$scope.edit = {items:[{"inputdate":new Date()}],
+		supplier_date:new Date(),
+		consignee_date:new Date()
+	};
 	$scope.add = function () {
 		$scope.title='新增';
 		$scope.ico = 'img/icons/edit_add.png';
@@ -135,11 +138,14 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache) {
 		$scope.shouldBeOpen = true;
 	};
 	$scope.close = function () {
-		$scope.closeMsg = 'I was closed at: ' + new Date();
 		$scope.shouldBeOpen = false;
 	};
+	$scope.save = function () {
+		$window.alert("保存成功!");
+		$scope.shouldBeOpen = false;
+		$scope.edit = {items:[{"inputdate":new Date()}]};
+	};
 
-	$scope.items = ['item1', 'item2'];
 	$scope.opts = {
 		backdropFade : true,
 		dialogFade : true
@@ -149,11 +155,16 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache) {
 		if(!$scope.edit.items){
 			$scope.edit.items = [];
 		}
-		$scope.edit.items[$scope.edit.items.length]={};
+		$scope.edit.items[$scope.edit.items.length]={"inputdate":new Date()};
 	}
 	$scope.removeitem = function(index){
 		console.log("======="+index);
-		$scope.edit.items.splice(index,1);
+		if($window.confirm("是否确认删除本行?")){
+			$scope.edit.items.splice(index,1);
+			if($scope.edit.items.length==0){
+				$scope.edit.items[$scope.edit.items.length]={"inputdate":new Date()};
+			}
+		}
 	}
 	//分页的数据
 	$scope.noOfPages = 111;

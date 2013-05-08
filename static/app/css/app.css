@@ -387,6 +387,9 @@ a{
 .item-table select,.item-table textarea,.item-table input[type="text"],.item-table input[type="password"],.item-table input[type="datetime"],.item-table input[type="datetime-local"],.item-table input[type="date"],.item-table input[type="month"],.item-table input[type="time"],.item-table input[type="week"],.item-table input[type="number"],.item-table input[type="email"],.item-table input[type="url"],.item-table input[type="search"],.item-table input[type="tel"],.item-table input[type="color"],.item-table .uneditable{
 	height:20px !important;
 	line-height:18px !important;
+	padding:0px;
+	margin:0px;
+	height:26px !important;
 }
 .item-table{
 	border:0px solid gray;

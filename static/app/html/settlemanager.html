@@ -52,13 +52,13 @@
 						</tr>	
 						<tr ng-repeat="item in edit.items" class='row-div'>
 							<td><input style='width:75px' ng-model='item.inputdate' ui-date></td>
-							<td><input type='text' style='width:50px' ng-model='item.name'></td>
-							<td><input type='text' style='width:50px' ng-model='item.size'></td>
-							<td><input type='text' style='width:50px' ng-model='item.unit'></td>
-							<td><input type='text' style='width:50px' ng-model='item.num'></td>
-							<td><input type='text' style='width:50px' ng-model='item.price'></td>
-							<td><input type='text' style='width:50px' ng-model='item.sum'></td>
-							<td><input type='text' style='width:50px' ng-model='item.remark'></td>
+							<td><select type='text' style='width:95px' ng-model='item.name' required ng-options="c.code as c.value for c in cache.data['stone']"/></td>
+							<td><select type='text' style='width:130px' ng-model='item.size' required ng-options="c.code as c.value for c in cache.data['stone__size'+item.name]"></td>
+							<td><select type='text' style='width:65px' ng-model='item.unit' required ng-options="c.code as c.value for c in cache.data['stone__unit'+item.name]"></td>
+							<td><input type='text' style='width:50px' title='{{item.num}}' required ng-model='item.num'></td>
+							<td><input type='text' style='width:50px' title='{{item.price}}' required ng-model='item.price'></td>
+							<td><input type='text' style='width:50px' title='{{item.sum}}' required ng-model='item.sum' value='{{ parseInt(item.num) * parseFloat(item.price) }}'></td>
+							<td><input type='text' style='width:50px' title='{{item.remark}}' ng-model='item.remark'></td>
 							<td class='cell-opt'><a ng-click="removeitem($index)" title='删除一行' ><img src="img/icons/edit_remove.png"/></a></td>
 						</tr>	
 						</table>
@@ -66,24 +66,25 @@
 				</tr>
 				<tr>
 					<td class='table-left-head'>
-					供货方(签字)：<input type='text' ng-model='edit.supplier' style='width:184px;'>
+					供货方(签字)：<input type='text' ng-model='edit.supplier_opt' style='width:184px;'>
 					</td>
 					<td class='table-right-head'>
-					收货方(签字)：<input type='text' ng-model='edit.consignee'style='width:184px;' >
+					收货方(签字)：<input type='text' ng-model='edit.consignee_opt'style='width:184px;' >
 					</td>
 				</tr>
 				<tr>
 					<td class='table-left-head'>
-					供货日期：<input type='text' ng-model='edit.consignee' ui-date>
+					供货日期：<input type='text' ng-model='edit.supplier_date' ui-date>
 					</td>
 					<td class='table-right-head'>
-					收货日期：<input type='text' ng-model='edit.consignee' ui-date>
+					收货日期：<input type='text' ng-model='edit.consignee_date' ui-date>
 					</td>
 				</tr>
 			</table>
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-warning cancel" ng-click="close()">Cancel</button>
+			<button class="btn btn-warning cancel" ng-click="save()">保存</button>
+			<button class="btn btn-warning cancel" ng-click="close()">关闭</button>
 		</div>
 	</div>
 </div>
