@@ -107,6 +107,16 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 	$location.path('/login');
 	$location.replace();
 	} */
+	//初始化数据
+	var initedit = function (){
+		return {
+			'_id':null,
+			items:[{"inputdate":new Date()}],
+			supplier_date:new Date(),
+			consignee_date:new Date()
+		}
+	};
+	var lastedit = initedit();
 	cache.then(function(data) {
 		$scope.cache = data;
 		console.log($scope.cache);
@@ -125,10 +135,8 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 		]
 	};
 	//编辑数据
-	$scope.edit = {items:[{"inputdate":new Date()}],
-		supplier_date:new Date(),
-		consignee_date:new Date()
-	};
+	$scope.edit = initedit();
+	
 	$scope.add = function () {
 		$scope.title='新增';
 		$scope.ico = 'img/icons/edit_add.png';
@@ -140,32 +148,88 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 	$scope.close = function () {
 		$scope.shouldBeOpen = false;
 	};
+	//重置
+	$scope.reset = function(){
+		$scope.edit = initedit();
+	}
+	//保存
 	$scope.save = function () {
-		$window.alert("保存成功!");
-		$scope.shouldBeOpen = false;
-		$scope.edit = {items:[{"inputdate":new Date()}]};
+		console.log($scope.edit);
+		$http({
+			method : 'POST',
+			url : '/settlemanager/add',
+			params : $scope.edit
+		}).
+		success(function (data, status, headers, config) {
+			if (data.code == 'true') {
+				$window.alert("保存成功!");
+				$scope.shouldBeOpen = false;
+				lastedit = $scope.edit;
+				$scope.edit = initedit();
+			} else {
+				$window.alert(data.msg);
+			}
+		}).
+		error(function (data, status, headers, config) {
+			console.log("错误数据如下:");
+			console.log("data:");
+			console.log(data);
+			console.log("status:");
+			console.log(status);
+			console.log("headers:");
+			console.log(headers);
+			console.log("config:");
+			console.log(config);
+			$scope.msg = '保存异常!';
+		});
+	
+		
 	};
 
 	$scope.opts = {
 		backdropFade : true,
 		dialogFade : true
 	};
-	//增加石材
+	//增加一行
 	$scope.additem = function(){
 		if(!$scope.edit.items){
 			$scope.edit.items = [];
 		}
 		$scope.edit.items[$scope.edit.items.length]={"inputdate":new Date()};
 	}
+	//删除一行
 	$scope.removeitem = function(index){
-		console.log("======="+index);
 		if($window.confirm("是否确认删除本行?")){
 			$scope.edit.items.splice(index,1);
 			if($scope.edit.items.length==0){
 				$scope.edit.items[$scope.edit.items.length]={"inputdate":new Date()};
 			}
+			recalc();
 		}
 	}
+	//行中的价格或数量变化时,重新计算金额.
+	$scope.change = function(index){
+		if(!angular.isNumber($scope.edit.items[index].num)){
+			$scope.edit.items[index].num = 0;
+		}
+		if(!angular.isNumber($scope.edit.items[index].price)){
+			$scope.edit.items[index].price = 0;
+		}
+		if(!angular.isNumber($scope.edit.items[index].remit)){
+			$scope.edit.items[index].remit = 0;
+		}
+		$scope.edit.items[index].sum = $scope.edit.items[index].num* $scope.edit.items[index].price - $scope.edit.items[index].remit;
+		recalc();
+	}
+	function recalc(){
+		$scope.edit.allsum = 0;
+		for( var i = 0 ; i <$scope.edit.items.length ; i ++){
+			if(!angular.isNumber($scope.edit.items[i].sum)){
+				$scope.edit.items[i].sum = 0;
+			}
+			$scope.edit.allsum += $scope.edit.items[i].sum;
+		}
+	}	
 	//分页的数据
 	$scope.noOfPages = 111;
 	$scope.currentPage = 4;

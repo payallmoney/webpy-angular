@@ -38,30 +38,44 @@
 				</tr>
 				<tr>
 					<td colspan=2>
-						<table class='item-table'>
-						<tr class='row-div row-head'>
-							<td style='width:75px'>日期</td>
-							<td style='width:50px'>品名</td>
-							<td style='width:50px'>规格</td>
-							<td style='width:50px'>单位</td>
-							<td style='width:50px'>数量</td>
-							<td style='width:50px'>单价</td>
-							<td style='width:50px'>金额</td>
-							<td style='width:50px'>备注</td>
-							<td style='width:50px'>操作</td>
-						</tr>	
-						<tr ng-repeat="item in edit.items" class='row-div'>
-							<td><input style='width:75px' ng-model='item.inputdate' ui-date></td>
-							<td><select type='text' style='width:95px' ng-model='item.name' required ng-options="c.code as c.value for c in cache.data['stone']"/></td>
-							<td><select type='text' style='width:130px' ng-model='item.size' required ng-options="c.code as c.value for c in cache.data['stone__size'+item.name]"></td>
-							<td><select type='text' style='width:65px' ng-model='item.unit' required ng-options="c.code as c.value for c in cache.data['stone__unit'+item.name]"></td>
-							<td><input type='text' style='width:50px' title='{{item.num}}' required ng-model='item.num'></td>
-							<td><input type='text' style='width:50px' title='{{item.price}}' required ng-model='item.price'></td>
-							<td><input type='text' style='width:50px' title='{{item.sum}}' required ng-model='item.sum' value='{{ parseInt(item.num) * parseFloat(item.price) }}'></td>
-							<td><input type='text' style='width:50px' title='{{item.remark}}' ng-model='item.remark'></td>
-							<td class='cell-opt'><a ng-click="removeitem($index)" title='删除一行' ><img src="img/icons/edit_remove.png"/></a></td>
-						</tr>	
-						</table>
+						<div class='listdiv'>
+							<table class='item-table'>
+								<tr class='row-div row-head'>
+									<td style='width:30px'>&nbsp;</td>
+									<td style='width:75px'>日期</td>
+									<td style='width:95px'>品名</td>
+									<td style='width:130px'>规格</td>
+									<td style='width:65px'>单位</td>
+									<td style='width:50px'>数量</td>
+									<td style='width:50px'>单价</td>
+									<td style='width:50px'>减计</td>
+									<td style='width:70px'>金额</td>
+									<td style='width:50px'>备注</td>
+									<td style='width:50px'>操作</td>
+								</tr>	
+								<tr ng-repeat="item in edit.items" class='row-div'>
+									<td ng-bind-html-unsafe='$index+1'></td>
+									<td><input style='width:75px' ng-model='item.inputdate' ui-date></td>
+									<td><select type='text' style='width:95px' ng-model='item.name' required ng-options="c.code as c.value for c in cache.data['stone']"/></td>
+									<td><select type='text' style='width:130px' ng-model='item.size' required ng-options="c.code as c.value for c in cache.data['stone__size'+item.name]"></td>
+									<td><select type='text' style='width:65px' ng-model='item.unit' required ng-options="c.code as c.value for c in cache.data['stone__unit'+item.name]"></td>
+									<td><input type='number' style='width:50px' title='{{item.num}}' required ng-model='item.num' ng-change="change($index)"></td>
+									<td><input type='number' style='width:50px' title='{{item.price}}' required ng-model='item.price' ng-change="change($index)"></td>
+									<td><input type='number' style='width:50px' title='{{item.remit}}' required ng-model='item.remit' ng-change="change($index)"></td>
+									<td><input type='number' style='width:70px' title='{{item.sum}}' required ng-model='item.sum' ></td>
+									<td><input type='text' style='width:50px' title='{{item.remark}}' ng-model='item.remark'></td>
+									<td class='cell-opt'><a ng-click="removeitem($index)" title='删除一行' ><img src="img/icons/edit_remove.png"/></a></td>
+								</tr>	
+							</table>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class='table-left-head'>
+					&nbsp;
+					</td>
+					<td class='table-right-head'>
+					总金额：<input type='number' ng-model='edit.allsum' style='width:184px;' >
 					</td>
 				</tr>
 				<tr>
@@ -84,6 +98,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-warning cancel" ng-click="save()">保存</button>
+			<button class="btn btn-warning cancel" ng-click="reset()">重置</button>
 			<button class="btn btn-warning cancel" ng-click="close()">关闭</button>
 		</div>
 	</div>

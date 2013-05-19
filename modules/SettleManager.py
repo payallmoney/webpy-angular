@@ -2,17 +2,33 @@
 import web
 import utils
 import json
+from bson.json_util import dumps
 urls = (
   "/list","settlemanager_list",
   "/add","settlemanager_add",
   "", "settlemanager"
 )
 class settlemanager:
-    def GET(self):
+    def POST(self):
         return utils.render_template('settlemanager.html')
 class settlemanager_add:
-    def GET(self):
-        return utils.render_template('settlemanager_add.html')
+    def POST(self):
+        data = web.input()
+        print(data)
+        if "_id" in data:
+            param = {'_id':data['_id']}
+            settle = utils.db.settles.findOne(param)
+            if settle:
+                utils.db.settles.update({'_id':data['_id']},{ '$set': data})
+            else:
+                utils.db.settles.insert(data)
+        else:
+            utils.db.settles.insert(data)
+        print(data)
+        data["msg"] = u'保存成功!'
+        data["code"] = 'true'
+        web.header('Content-Type', 'application/json')
+        return dumps(data)
 class settlemanager_list:
     returnobj = [{'name': "Moroni", 'age': 50},
                      {'name': "Tiancum", 'age': 43},
