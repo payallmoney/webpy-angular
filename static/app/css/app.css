@@ -218,6 +218,10 @@ border-radius: 0 !important;
 	right:5px;
 	top:40px;
 	bottom:40px;
+	outline:none;
+}
+div{
+	outline:none;
 }
 .gridbuttonDiv {
 	position:absolute;

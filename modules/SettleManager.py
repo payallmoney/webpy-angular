@@ -30,12 +30,34 @@ class settlemanager_add:
         web.header('Content-Type', 'application/json')
         return dumps(data)
 class settlemanager_list:
-    returnobj = [{'name': "Moroni", 'age': 50},
-                     {'name': "Tiancum", 'age': 43},
-                     {'name': "Jacob", 'age': 27},
-                     {'name': "Nephi", 'age': 29},
-                     {'name': "Enos", 'age': 34}]
     def POST(self):
+        data = web.input()
+        print("???????");
+        print(data);
+        page = json.loads(data.page);
+        print(page)
+        max = utils.db.settles.find().count();
+        skip = page['pageSize'] * (page['currentPage'] -1);
+        if skip <0 :
+            skip = 0
+        print(skip);
+        querydata = utils.db.settles.find().skip(skip).limit(page['pageSize'] )
         web.header('Content-Type', 'application/json')
-        return json.dumps(self.returnobj)
+        noOfPages = max/page['pageSize'];
+        if max % page['pageSize'] >0:
+            noOfPages += 1
+        currentPage = page['currentPage'] if noOfPages >= page['currentPage']   else noOfPages
+        ret = { "code":'true',
+            'msg':'查询成功',
+            "page":{
+                    "noOfPages" : noOfPages,
+                    "currentPage" : currentPage ,
+                    "maxSize" : page['maxSize'],
+                    "pageSize": page['pageSize'],
+                    "maxNum" : max
+                },
+            "data":querydata
+        }
+        #print(dumps(ret))
+        return dumps(ret)
 app_settlemanager = web.application(urls, locals())

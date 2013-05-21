@@ -121,19 +121,44 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 		$scope.cache = data;
 		console.log($scope.cache);
 	});
+	console.log($.parseJSON);
 	//显示列表
 	$scope.gridData = [];
 	$scope.gridOptions = {
 		data : 'gridData',
+		showSelectionCheckbox:true,
 		columnDefs : [{
-				field : 'name',
-				displayName : '姓名'
+				field : 'supplier',
+				displayName : '供货方',
+				cellTemplate : '<div class="ngCellText colt{{$index}}">{{row.getProperty(col.field)}}</div>'
 			}, {
-				field : 'age',
-				displayName : '年龄'
+				field : 'consignee',
+				displayName : '收货方'
+			}, {
+				field : 'supplier_date',
+				displayName : '供货日期',
+				cellTemplate : '<div class="ngCellText colt{{$index}}"> {{row.getProperty(col.field) | decode | date:"yyyy-M-d"}} </div>'
+			}, {
+				field : 'consignee_date',
+				displayName : '收货日期',
+				cellTemplate : '<div class="ngCellText colt{{$index}}"> {{row.getProperty(col.field) | decode | date:"yyyy-M-d"}} </div>'
+			}, {
+				field : 'supplier_opt',
+				displayName : '供货方签字'
+			}, {
+				field : 'consignee_opt',
+				displayName : '收货方签字'
+			}, {
+				field : 'allsum',
+				displayName : '总金额'
 			}
-		]
+		],
+		rowTemplate:'<div ng-style="{\'cursor\': row.cursor, \'z-index\': col.zIndex() }" ng-dblclick="gridDBLClick($index)" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>'
 	};
+	//双击事件
+	$scope.gridDBLClick = function(index){
+		$window.alert(index);
+	}
 	//编辑数据
 	$scope.edit = initedit();
 	
@@ -182,10 +207,38 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 			console.log(config);
 			$scope.msg = '保存异常!';
 		});
-	
-		
 	};
-
+	//查询
+	$scope.query = function(){
+		console.log("eeeeeeee");
+		$http({
+			method : 'POST',
+			url : '/settlemanager/list',
+			params : {"page":$scope.page,"params":$scope.params}
+		}).
+		success(function (data, status, headers, config) {
+			if (data.code == 'true') {
+				$scope.page = data.page;
+				console.log(data);
+				console.log(data['data']);
+				$scope.gridData = data.data;
+			} else {
+				$window.alert(data.msg);
+			}
+		}).
+		error(function (data, status, headers, config) {
+			console.log("错误数据如下:");
+			console.log("data:");
+			console.log(data);
+			console.log("status:");
+			console.log(status);
+			console.log("headers:");
+			console.log(headers);
+			console.log("config:");
+			console.log(config);
+			$scope.msg = '保存异常!';
+		});
+	}
 	$scope.opts = {
 		backdropFade : true,
 		dialogFade : true
@@ -231,13 +284,26 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 		}
 	}	
 	//分页的数据
-	$scope.noOfPages = 111;
-	$scope.currentPage = 4;
-	$scope.maxSize = 10;
-	$scope.maxNum = 1105;
+	$scope.page = {
+		noOfPages : 1,
+		currentPage : 1,
+		maxSize : 15,
+		pageSize :15,
+		maxNum : 1
+	}
 
-	$scope.setPage = function (pageNo) {
-		$scope.currentPage = pageNo;
+	$scope.selectPage = function (pageNo) {
+		print("这里做了?");
+		console.log(pageNo);
+		$scope.page.currentPage = pageNo;
+		$scope.query();
+	};
+	$scope.$watch('page.currentPage', function() {
+		$scope.query();
+    });
+	function selectPage(pageNo) {
+		print("这里1111做了?");
+		$scope.page.currentPage = pageNo;;
 	};
 }
 

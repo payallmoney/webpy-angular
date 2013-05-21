@@ -7,12 +7,12 @@
 			  <option value="">-- 选择查询项 --</option>
 		</select>
 		<input type='text' ng-model='queryItem' class='queryinput'>
-		<button ng-click='' class='btn btn_add'><img src="img/icons/query.png"/>查询</button>
+		<button ng-click='query()' class='btn btn_add'><img src="img/icons/query.png"/>查询</button>
 	</div>
 	<div class="gridStyle" ng-grid="gridOptions"></div>
 	<div>
-		<div class='totalText'>共{{maxNum}}行{{noOfPages}}页</div>
-		<pagination boundary-links="true" num-pages="noOfPages" current-page="currentPage" max-size="maxSize"></pagination>
+		<div class='totalText'>共{{page.maxNum}}行{{page.noOfPages}}页</div>
+		<pagination boundary-links="true" num-pages="page.noOfPages" current-page="page.currentPage" max-size="page.maxSize"></pagination>
 	</div>
 	<div modal="shouldBeOpen" close="close()" options="opts" class='modal-div'>
 		<div class='closebuttondiv'>
