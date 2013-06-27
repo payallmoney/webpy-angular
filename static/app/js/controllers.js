@@ -102,7 +102,7 @@ var MainCtrl = function ($scope, $http, $location, loginService) {
 
 };
 
-var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
+var SettleManagerCtrl = function ($scope, $http, $location,cache,$window,$filter) {
 	/* if(!loginService.user){
 	$location.path('/login');
 	$location.replace();
@@ -111,9 +111,10 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 	var initedit = function (){
 		return {
 			'_id':null,
-			items:[{"inputdate":new Date()}],
-			supplier_date:new Date(),
-			consignee_date:new Date()
+			items:[{"inputdate":$filter('date')(new Date() ,'yyyy-MM-dd')}],
+			//2013-05-21T11:40:36.049Z
+			supplier_date:$filter('date')(new Date() ,'yyyy-MM-dd'),
+			consignee_date:$filter('date')(new Date() ,'yyyy-MM-dd')
 		}
 	};
 	var lastedit = initedit();
@@ -137,11 +138,11 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 			}, {
 				field : 'supplier_date',
 				displayName : '供货日期',
-				cellTemplate : '<div class="ngCellText colt{{$index}}"> {{row.getProperty(col.field) | decode | date:"yyyy-M-d"}} </div>'
+				cellTemplate : '<div class="ngCellText colt{{$index}}"> {{row.getProperty(col.field) | decode | date:"yyyy-MM-dd"}} </div>'
 			}, {
 				field : 'consignee_date',
 				displayName : '收货日期',
-				cellTemplate : '<div class="ngCellText colt{{$index}}"> {{row.getProperty(col.field) | decode | date:"yyyy-M-d"}} </div>'
+				cellTemplate : '<div class="ngCellText colt{{$index}}"> {{row.getProperty(col.field) | decode | date:"yyyy-MM-dd"}} </div>'
 			}, {
 				field : 'supplier_opt',
 				displayName : '供货方签字'
@@ -153,19 +154,22 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 				displayName : '总金额'
 			}
 		],
-		rowTemplate:'<div ng-style="{\'cursor\': row.cursor, \'z-index\': col.zIndex() }" ng-dblclick="gridDBLClick($index)" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>'
+		rowTemplate:'<div ng-style="{\'cursor\': row.cursor, \'z-index\': col.zIndex() }" ng-dblclick="gridDBLClick(row.rowIndex)" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>'
 	};
 	//双击事件
 	$scope.gridDBLClick = function(index){
-		$window.alert(index);
+		console.log($scope.gridData[index]);
+		$scope.edit = $scope.gridData[index];
+		$scope.shouldBeOpen = true;
 	}
 	//编辑数据
-	$scope.edit = initedit();
+	
 	
 	$scope.add = function () {
 		$scope.title='新增';
 		$scope.ico = 'img/icons/edit_add.png';
 		$scope.shouldBeOpen = true;
+		$scope.edit = initedit();
 	}
 	$scope.open = function () {
 		$scope.shouldBeOpen = true;
@@ -210,7 +214,6 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 	};
 	//查询
 	$scope.query = function(){
-		console.log("eeeeeeee");
 		$http({
 			method : 'POST',
 			url : '/settlemanager/list',
@@ -219,8 +222,6 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 		success(function (data, status, headers, config) {
 			if (data.code == 'true') {
 				$scope.page = data.page;
-				console.log(data);
-				console.log(data['data']);
 				$scope.gridData = data.data;
 			} else {
 				$window.alert(data.msg);
@@ -248,7 +249,7 @@ var SettleManagerCtrl = function ($scope, $http, $location,cache,$window) {
 		if(!$scope.edit.items){
 			$scope.edit.items = [];
 		}
-		$scope.edit.items[$scope.edit.items.length]={"inputdate":new Date()};
+		$scope.edit.items[$scope.edit.items.length]={"inputdate":$filter('date')(new Date() ,'yyyy-MM-dd')};
 	}
 	//删除一行
 	$scope.removeitem = function(index){

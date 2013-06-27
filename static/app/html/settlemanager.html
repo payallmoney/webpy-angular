@@ -55,7 +55,7 @@
 								</tr>	
 								<tr ng-repeat="item in edit.items" class='row-div'>
 									<td ng-bind-html-unsafe='$index+1'></td>
-									<td><input style='width:75px' ng-model='item.inputdate' ui-date></td>
+									<td><input style='width:75px' ng-model='item.inputdate' ui-date ui-date-format="yy-mm-dd"></td>
 									<td><select type='text' style='width:95px' ng-model='item.name' required ng-options="c.code as c.value for c in cache.data['stone']"/></td>
 									<td><select type='text' style='width:130px' ng-model='item.size' required ng-options="c.code as c.value for c in cache.data['stone__size'+item.name]"></td>
 									<td><select type='text' style='width:65px' ng-model='item.unit' required ng-options="c.code as c.value for c in cache.data['stone__unit'+item.name]"></td>
@@ -88,10 +88,10 @@
 				</tr>
 				<tr>
 					<td class='table-left-head'>
-					供货日期：<input type='text' ng-model='edit.supplier_date' ui-date>
+					供货日期：<input type='text' ng-model='edit.supplier_date' ui-date ui-date-format="yy-mm-dd">
 					</td>
 					<td class='table-right-head'>
-					收货日期：<input type='text' ng-model='edit.consignee_date' ui-date>
+					收货日期：<input type='text' ng-model='edit.consignee_date' ui-date ui-date-format="yy-mm-dd">
 					</td>
 				</tr>
 			</table>
